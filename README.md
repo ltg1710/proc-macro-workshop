@@ -1,3 +1,25 @@
+
+# 学习内容
+[proc-macro-workshop](https://github.com/dtolnay/proc-macro-workshop)
+[中文讲解](https://blog.ideawand.com/2021/03/24/rust_procedural_macro/rust_proc_marco_workshop_guide-02/)。当前时间(2022-10)没有讲完。
+
+# 答案
+* [WhoisDavid](https://github.com/WhoisDavid/rust-learnings/tree/master/proc-macro-workshop)，已完成；
+* [jonhoo](https://github.com/jonhoo/proc-macro-workshop)，没做完。  
+
+## 书籍：
+* [宏小册](https://zjp-cn.github.io/tlborm/introduction.html)
+
+## 视频
+* jonhoo [partI](https://www.youtube.com/watch?v=geovSK3wMB8)
+* jonhoo [partII](https://www.youtube.com/watch?v=KVWHT1TAirU)
+
+## 完美应用
+* [yew](https://github.com/yewstack/yew)
+* 
+
+<details>
+<summary>隐藏了原版Readme</summary>
 # Rust Latam: procedural macros workshop
 
 *This repo contains a selection of projects designed to learn to write Rust
@@ -12,14 +34,25 @@ by other authors.*
 
 ## Contents
 
-- [**Suggested prerequisites**](#suggested-prerequisites)
-- [**Projects**](#projects) — Introduction to each of the projects
-  - [**Derive macro:** `derive(Builder)`](#derive-macro-derivebuilder)
-  - [**Derive macro:** `derive(CustomDebug)`](#derive-macro-derivecustomdebug)
-  - [**Function-like macro:** `seq!`](#function-like-macro-seq)
-  - [**Attribute macro:** `#[sorted]`](#attribute-macro-sorted)
-  - [**Attribute macro:** `#[bitfield]`](#attribute-macro-bitfield)
-  - [**Project recommendations**](#project-recommendations) — What to work on
+- [学习内容](#学习内容)
+- [答案](#答案)
+  - [书籍：](#书籍)
+  - [视频](#视频)
+  - [完美应用](#完美应用)
+- [Rust Latam: procedural macros workshop](#rust-latam-procedural-macros-workshop)
+  - [Contents](#contents)
+  - [Suggested prerequisites](#suggested-prerequisites)
+  - [Projects](#projects)
+    - [Derive macro: `derive(Builder)`](#derive-macro-derivebuilder)
+    - [Derive macro: `derive(CustomDebug)`](#derive-macro-derivecustomdebug)
+    - [Function-like macro: `seq!`](#function-like-macro-seq)
+    - [Attribute macro: `#[sorted]`](#attribute-macro-sorted)
+    - [Attribute macro: `#[bitfield]`](#attribute-macro-bitfield)
+    - [Project recommendations](#project-recommendations)
+  - [Test harness](#test-harness)
+  - [Workflow](#workflow)
+  - [Debugging tips](#debugging-tips)
+    - [License](#license)
     depending on your interests
 - [**Test harness**](#test-harness) — Explanation of how testing is set up
 - [**Workflow**](#workflow) — Recommended way to work through the workshop
@@ -465,3 +498,4 @@ Unless you explicitly state otherwise, any contribution intentionally submitted
 for inclusion in this codebase by you, as defined in the Apache-2.0 license,
 shall be dual licensed as above, without any additional terms or conditions.
 </sub>
+</details>
