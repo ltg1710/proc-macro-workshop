@@ -30,10 +30,25 @@ pub fn derive(input: TokenStream) -> TokenStream {
         quote!(#ident: std::option::Option::None)
     });
 
+    let builder_fields_setters = fields.iter().map(|f| {
+        let ident = &f.ident;
+        let ty = &&f.ty;
+        quote!(
+            pub fn #ident(&mut self, #ident: #ty) -> &mut Self {
+                self.#ident = Some(#ident);
+                self
+            }
+        )
+    });
+
     let output = quote!(
         pub struct #derived_obj_builder_ident {
             #(#builder_fields_declare),
             *
+        }
+
+        impl #derived_obj_builder_ident {
+            #(#builder_fields_setters)*
         }
         
         impl #derived_obj_ident {
@@ -45,6 +60,8 @@ pub fn derive(input: TokenStream) -> TokenStream {
             }
         }
     );
+
+    // eprintln!("{:?}", output.to_string());
 
     TokenStream::from(output)
 }
