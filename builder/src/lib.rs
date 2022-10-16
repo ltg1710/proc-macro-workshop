@@ -11,7 +11,7 @@ fn get_name_value(name:&str, attr:&syn::Attribute) -> Result<syn::Ident, syn::__
             Ok(match &list.nested[0] {
                 syn::NestedMeta::Meta(syn::Meta::NameValue(nv)) => {
                     if !nv.path.is_ident(name) {
-                        return Err(syn::Error::new_spanned(list.nested, "expected `builder(each = \"...\")`").to_compile_error());
+                        return Err(syn::Error::new_spanned(list, "expected `builder(each = \"...\")`").to_compile_error());
                     } else {
                         match &nv.lit {
                             syn::Lit::Str(val) => {
