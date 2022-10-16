@@ -41,6 +41,13 @@ pub fn derive(input: TokenStream) -> TokenStream {
         )
     });
 
+    let builder_fields_clauses = fields.iter().map(|f| {
+        let ident = &f.ident;
+        quote!(
+            #ident: self.#ident.clone().ok_or(format!("{} field is missing", stringify!(#ident)))?
+        )
+    });
+
     let output = quote!(
         pub struct #derived_obj_builder_ident {
             #(#builder_fields_declare),
@@ -49,6 +56,13 @@ pub fn derive(input: TokenStream) -> TokenStream {
 
         impl #derived_obj_builder_ident {
             #(#builder_fields_setters)*
+            pub fn build(&mut self) -> std::result::Result<#derived_obj_ident, ::std::boxed::Box<dyn ::std::error::Error>> {
+                std::result::Result::Ok(
+                    #derived_obj_ident {
+                        #(#builder_fields_clauses),*
+                    }
+                )
+            }
         }
         
         impl #derived_obj_ident {
