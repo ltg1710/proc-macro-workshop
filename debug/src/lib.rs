@@ -1,6 +1,6 @@
 use proc_macro::TokenStream;
 use quote::{quote};
-use syn::Fields;
+use syn::{Fields, parse_quote};
 
 fn get_name_value(name:&str, attr:&syn::Attribute) -> Result<String, syn::__private::TokenStream2>{
     match attr.parse_meta() {
@@ -35,6 +35,16 @@ pub fn derive(input: TokenStream) -> TokenStream {
     let ast = syn::parse_macro_input!(input as syn::DeriveInput);
     let deriver_ident = &ast.ident;
     let deriver_literal = deriver_ident.to_string();
+
+    // modify generics
+    let mut generics_new = ast.generics;
+    for g in generics_new.params.iter_mut() {
+        if let syn::GenericParam::Type(t) = g {
+            t.bounds.push(parse_quote!(std::fmt::Debug));
+        }
+    }
+
+    let (impl_generics, ty_generics, where_clause) = generics_new.split_for_impl();
     
     let fields = match ast.data {
         syn::Data::Struct(ds) => {
@@ -58,13 +68,13 @@ pub fn derive(input: TokenStream) -> TokenStream {
             )
         } else {
             quote!(
-                .field(#literal, &self.#ident)
+                .field(#literal, &format_args!("{:?}", &self.#ident))
             )
         }
     });
 
     let output = quote! (
-        impl std::fmt::Debug for #deriver_ident {
+        impl #impl_generics std::fmt::Debug for #deriver_ident #ty_generics #where_clause {
             fn fmt(&self, fmt: &mut std::fmt::Formatter) -> std::fmt::Result {
                 fmt.debug_struct(#deriver_literal)
                     #(#builder_fields_fmt)*
