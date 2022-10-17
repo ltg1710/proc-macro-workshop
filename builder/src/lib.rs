@@ -18,7 +18,7 @@ fn get_name_value(name:&str, attr:&syn::Attribute) -> Result<syn::Ident, syn::__
                                 format_ident!("{}", val.value(), span = val.span())
                             },
                             _ => {
-                                return Err(syn::Error::new_spanned(list.nested, "expected `builder(each = \"...\")`").to_compile_error());
+                                return Err(syn::Error::new_spanned(nv, "expected `builder(each = \"...\")`").to_compile_error());
                             }
                         }
                     }
